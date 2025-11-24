@@ -24,7 +24,13 @@ console.log("CORS Options:", JSON.stringify(corsOptions, null, 2));
 
 app.use(cors(corsOptions));
 
-app.options("*", cors(corsOptions));
+app.options("*", (req, res) => {
+    res.header('Access-Control-Allow-Origin', FRONTEND_URL);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200);
+});
 
 console.log("✅ CORS middleware configured");
 console.log("✅ OPTIONS handler registered");
