@@ -1,7 +1,13 @@
+console.log("🚀 Starting server.js...");
+
 import dotenv from "dotenv";
 dotenv.config();
 
+console.log("✅ dotenv configured");
+
 import app from "./index.js";
+
+console.log("✅ app imported");
 
 const port = process.env.PORT || 3000;
 
