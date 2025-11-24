@@ -7,7 +7,11 @@ dotenv.config();
 
 const app = express();
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
-console.log("Allowed origin:", FRONTEND_URL);
+
+console.log("=== CORS Configuration Debug ===");
+console.log("process.env.FRONTEND_URL:", process.env.FRONTEND_URL);
+console.log("Using FRONTEND_URL:", FRONTEND_URL);
+console.log("All environment variables:", Object.keys(process.env).filter(k => k.includes('FRONTEND') || k.includes('PORT')));
 
 const corsOptions = {
     origin: FRONTEND_URL,
@@ -16,9 +20,14 @@ const corsOptions = {
     credentials: true
 };
 
+console.log("CORS Options:", JSON.stringify(corsOptions, null, 2));
+
 app.use(cors(corsOptions));
 
 app.options("*", cors(corsOptions));
+
+console.log("✅ CORS middleware configured");
+console.log("✅ OPTIONS handler registered");
 
 app.use(express.json());
 app.use('', routes);
