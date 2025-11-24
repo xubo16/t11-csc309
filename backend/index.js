@@ -11,6 +11,9 @@ console.log("Allowed origin:", FRONTEND_URL);
 
 app.use(cors({
     origin: FRONTEND_URL,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 app.use('', routes);
